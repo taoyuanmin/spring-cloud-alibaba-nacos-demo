@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.taoyuanmin.user.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.taoyuanmin.user.entity.User" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="head_img_url" property="headImgUrl" jdbcType="VARCHAR" />
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    <result column="real_name" property="realName" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="app_type" property="appType" jdbcType="INTEGER" />
+    <result column="open_id" property="openId" jdbcType="VARCHAR" />
+    <result column="access_token" property="accessToken" jdbcType="VARCHAR" />
+    <result column="refresh_token" property="refreshToken" jdbcType="VARCHAR" />
+    <result column="expire_time" property="expireTime" jdbcType="TIMESTAMP" />
+    <result column="source_type" property="sourceType" jdbcType="INTEGER" />
+    <result column="active" property="active" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_id, head_img_url, nick_name, real_name, age, phone, create_time, update_time, 
+    app_type, open_id, access_token, refresh_token, expire_time, source_type, active
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.taoyuanmin.user.entity.User" >
+    insert into user (user_id, head_img_url, nick_name, 
+      real_name, age, phone, 
+      create_time, update_time, app_type, 
+      open_id, access_token, refresh_token, 
+      expire_time, source_type, active
+      )
+    values (#{userId,jdbcType=INTEGER}, #{headImgUrl,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, 
+      #{realName,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{appType,jdbcType=INTEGER}, 
+      #{openId,jdbcType=VARCHAR}, #{accessToken,jdbcType=VARCHAR}, #{refreshToken,jdbcType=VARCHAR}, 
+      #{expireTime,jdbcType=TIMESTAMP}, #{sourceType,jdbcType=INTEGER}, #{active,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.taoyuanmin.user.entity.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="headImgUrl != null" >
+        head_img_url,
+      </if>
+      <if test="nickName != null" >
+        nick_name,
+      </if>
+      <if test="realName != null" >
+        real_name,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="appType != null" >
+        app_type,
+      </if>
+      <if test="openId != null" >
+        open_id,
+      </if>
+      <if test="accessToken != null" >
+        access_token,
+      </if>
+      <if test="refreshToken != null" >
+        refresh_token,
+      </if>
+      <if test="expireTime != null" >
+        expire_time,
+      </if>
+      <if test="sourceType != null" >
+        source_type,
+      </if>
+      <if test="active != null" >
+        active,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="headImgUrl != null" >
+        #{headImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null" >
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="appType != null" >
+        #{appType,jdbcType=INTEGER},
+      </if>
+      <if test="openId != null" >
+        #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="accessToken != null" >
+        #{accessToken,jdbcType=VARCHAR},
+      </if>
+      <if test="refreshToken != null" >
+        #{refreshToken,jdbcType=VARCHAR},
+      </if>
+      <if test="expireTime != null" >
+        #{expireTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sourceType != null" >
+        #{sourceType,jdbcType=INTEGER},
+      </if>
+      <if test="active != null" >
+        #{active,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.taoyuanmin.user.entity.User" >
+    update user
+    <set >
+      <if test="headImgUrl != null" >
+        head_img_url = #{headImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null" >
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="appType != null" >
+        app_type = #{appType,jdbcType=INTEGER},
+      </if>
+      <if test="openId != null" >
+        open_id = #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="accessToken != null" >
+        access_token = #{accessToken,jdbcType=VARCHAR},
+      </if>
+      <if test="refreshToken != null" >
+        refresh_token = #{refreshToken,jdbcType=VARCHAR},
+      </if>
+      <if test="expireTime != null" >
+        expire_time = #{expireTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sourceType != null" >
+        source_type = #{sourceType,jdbcType=INTEGER},
+      </if>
+      <if test="active != null" >
+        active = #{active,jdbcType=TINYINT},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.taoyuanmin.user.entity.User" >
+    update user
+    set head_img_url = #{headImgUrl,jdbcType=VARCHAR},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      real_name = #{realName,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      app_type = #{appType,jdbcType=INTEGER},
+      open_id = #{openId,jdbcType=VARCHAR},
+      access_token = #{accessToken,jdbcType=VARCHAR},
+      refresh_token = #{refreshToken,jdbcType=VARCHAR},
+      expire_time = #{expireTime,jdbcType=TIMESTAMP},
+      source_type = #{sourceType,jdbcType=INTEGER},
+      active = #{active,jdbcType=TINYINT}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>

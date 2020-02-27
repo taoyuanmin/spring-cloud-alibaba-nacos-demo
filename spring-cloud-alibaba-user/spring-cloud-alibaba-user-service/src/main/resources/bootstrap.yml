@@ -1,0 +1,45 @@
+########获取nacos配置中心上的配置文件作为加载时，需要在本项目中
+########使用bootstrap.yml（不能使用application.yml）把相关配置预先加载！！！
+#项目端口
+server:
+  #随机端口，从1000,9999
+  port: ${random.int[10000,99999]}
+
+#nacos服务
+nacos:
+  #服务地址
+  server-addr: 127.0.0.1:8848
+  #命名空间，即某个环境，eg:dev 所对应的id
+  namespace: 8bc2b517-a173-4ef5-8311-78efbcec89b6
+
+spring:
+  application:
+    #项目别名
+    name: spring-cloud-alibaba-nacos-user
+    #spring-cloud nacos服务
+  cloud:
+    nacos:
+      #注册中心
+      discovery:
+        #nacos服务地址,多个之间用逗号分隔
+        server-addr: ${nacos.server-addr}
+        #命名空间，一般用作环境，取id 8bc2b517-a173-4ef5-8311-78efbcec89b6
+        namespace: ${nacos.namespace}
+      #配置中心
+#      config:
+#        server-addr: ${nacos.server-addr}
+#        namespace: ${nacos.namespace}
+#        group: spring-cloud-alibaba-nacos
+#        #配置文件的扩展名：yml.项目启动时会根据spring.application.name+此后缀（file-extension）
+#        #进行拼接，获取配置中心上对应的配置文件。eg:dev->spring-cloud-alibaba-nacos-user.yml
+#        file-extension: yml
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/scrap_trading_center?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+
